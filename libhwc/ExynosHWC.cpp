@@ -249,7 +249,7 @@ int exynos5_prepare(hwc_composer_device_1_t *dev,
     pdev->updateCallCnt++;
     pdev->update_event_cnt++;
     pdev->LastUpdateTimeStamp = systemTime(SYSTEM_TIME_MONOTONIC);
-    pdev->primaryDisplay->getCompModeSwitch();
+//    pdev->primaryDisplay->getCompModeSwitch();
 
     pdev->totPixels = 0;
 
@@ -1047,24 +1047,24 @@ int exynos5_open(const struct hw_module_t *module, const char *name,
         dev->mCecFd = -1;
 #endif
 
-    ret = pthread_create(&dev->vsync_thread, NULL, hwc_vsync_thread, dev);
-    if (ret) {
-        ALOGE("failed to start vsync thread: %s", strerror(ret));
-        ret = -ret;
-        goto err_vsync;
-    }
+//    ret = pthread_create(&dev->vsync_thread, NULL, hwc_vsync_thread, dev);
+//    if (ret) {
+//        ALOGE("failed to start vsync thread: %s", strerror(ret));
+//        ret = -ret;
+//        goto err_vsync;
+//    }
 
-    dev->update_stat_thread_flag = true;
-    ret = pthread_create(&dev->update_stat_thread, NULL, hwc_update_stat_thread, dev);
-    if (ret) {
-        ALOGE("failed to start update_stat thread: %s", strerror(ret));
-        ret = -ret;
-        goto err_vsync;
-    }
+//    dev->update_stat_thread_flag = true;
+//    ret = pthread_create(&dev->update_stat_thread, NULL, hwc_update_stat_thread, dev);
+//    if (ret) {
+//        ALOGE("failed to start update_stat thread: %s", strerror(ret));
+//        ret = -ret;
+//        goto err_vsync;
+//    }
 
     dev->hwc_ctrl.max_num_ovly = NUM_HW_WINDOWS;
     dev->hwc_ctrl.num_of_video_ovly = 2;
-    dev->hwc_ctrl.dynamic_recomp_mode = (dev->psrMode == PSR_NONE);
+    dev->hwc_ctrl.dynamic_recomp_mode = false;//(dev->psrMode == PSR_NONE);
     dev->hwc_ctrl.skip_static_layer_mode = true;
     dev->hwc_ctrl.dma_bw_balance_mode = true;
 
